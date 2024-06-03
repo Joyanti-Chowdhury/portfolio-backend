@@ -9,7 +9,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // middleware
-app.use(cors({origin: 'http://localhost:5173',credentials: true}));
+app.use(cors({origin: 'http://localhost:5173',origin:'https://665d9386c001c34401e43ad4--lucent-ganache-1a7d20.netlify.app',credentials: true}));
 app.use(morgan('dev'))
 app.use(express.json());
 
