@@ -9,7 +9,27 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // middleware
-app.use(cors({origin: 'http://localhost:5173',origin:'https://665d9386c001c34401e43ad4--lucent-ganache-1a7d20.netlify.app',credentials: true}));
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:5173",
+//       "https://iridescent-lily-be83f9.netlify.app",
+//     ],
+//     credentials: true,
+//   })
+// );
+
+
+app.use(cors({
+  origin: ['http://localhost:5173',
+ 'https://665d9386c001c34401e43ad4--lucent-ganache-1a7d20.netlify.app',
+ "https://665d97d8c001c34840e43a4a--stalwart-rabanadas-c04778.netlify.app"
+
+
+]
+ 
+ ,credentials: true}));
+
 app.use(morgan('dev'))
 app.use(express.json());
 
