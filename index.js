@@ -21,10 +21,13 @@ const port = process.env.PORT || 5000;
 
 
 app.use(cors({
-  origin: ['http://localhost:5173',
+  origin: [,'http://localhost:5173',
  'https://665d9386c001c34401e43ad4--lucent-ganache-1a7d20.netlify.app',
- "https://665d97d8c001c34840e43a4a--stalwart-rabanadas-c04778.netlify.app"
-
+ "https://665d97d8c001c34840e43a4a--stalwart-rabanadas-c04778.netlify.app",
+ "http://localhost:3000",
+ "https://66600b946f35fec108c3d143--lucent-fairy-9ff55c.netlify.app",
+ "https://lucent-fairy-9ff55c.netlify.app",
+"https://lucent-ganache-1a7d20.netlify.app"
 
 ]
  
@@ -36,6 +39,16 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("My portfolio is representing");
 });
+
+
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
+
+
+
 
 // app.get("/users", (req, res) => {
 //   res.send(users);
@@ -59,6 +72,14 @@ async function run() {
 
     const portfolioCollection
     = client.db("portfolioDb").collection("portfolioCollection");
+
+    const blogCollection = client.db("portfolioDb").collection("blogCollection");
+
+    app.get('/blog',async(req,res) => {
+      const cursor =blogCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    })
 
 
      
@@ -92,7 +113,12 @@ async function run() {
       const query = {_id : new ObjectId(id)};
       const result = await portfolioCollection.deleteOne(query);
       res.send(result);
-    })
+    });
+
+    
+
+
+
 
 
 
